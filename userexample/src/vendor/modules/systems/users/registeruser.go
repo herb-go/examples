@@ -3,11 +3,11 @@ package users
 import (
 	"modules/members"
 
-	"github.com/herb-go/herb/user/status"
+	"github.com/herb-go/user/status"
 
-	"github.com/herb-go/herb/user"
+	"github.com/herb-go/user"
 
-	"github.com/herb-go/herb/user/profile"
+	"github.com/herb-go/user/profile"
 	"github.com/herb-go/uniqueid"
 	"github.com/herb-go/usersystem/usercreate"
 )

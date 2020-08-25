@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/herb-go/herb/user"
+	"github.com/herb-go/user"
 
 	"github.com/herb-go/herb/ui"
 	"github.com/herb-go/herb/ui/validator/formdata"

@@ -6,7 +6,7 @@ import (
 
 	"github.com/herb-go/herb/middleware/action"
 	"github.com/herb-go/herb/ui/render"
-	"github.com/herb-go/herb/user/profile"
+	"github.com/herb-go/user/profile"
 )
 
 var ActionCurrent = action.New(func(w http.ResponseWriter, r *http.Request) {
