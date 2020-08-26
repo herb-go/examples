@@ -9,6 +9,8 @@ import (
 	"modules/systems/users/listaction"
 	registeraction "modules/systems/users/register/actions"
 
+	"github.com/herb-go/herb/identifier"
+
 	"github.com/herb-go/util/action/commonaction"
 
 	"github.com/herb-go/herb/middleware"
@@ -16,6 +18,8 @@ import (
 	"github.com/herb-go/herb/middleware/router"
 	"github.com/herb-go/herb/middleware/router/httprouter"
 )
+
+var LoginRequired = identifier.NewLoggedInFilter(members.WebSession, nil).ServeMiddleware
 
 //APIMiddlewares middlewares that should used in api requests
 var APIMiddlewares = func() middleware.Middlewares {
@@ -30,9 +34,9 @@ var RouterAPIFactory = router.NewFactory(func() router.Router {
 	var Router = httprouter.New()
 	//Put your router configure code here
 	Router.GET("/list").Handle(listaction.ActionList)
-	Router.GET("/current").Handle(currentaction.ActionCurrent)
-	Router.GET("/actives").Handle(activesaction.ActionActives)
-	Router.POST("/logout").Use(members.WebSession.LogoutMiddleware).HandleFunc(commonaction.SuccessAction)
+	Router.GET("/current").Use(LoginRequired).Handle(currentaction.ActionCurrent)
+	Router.GET("/actives").Use(LoginRequired).Handle(activesaction.ActionActives)
+	Router.POST("/logout").Use(LoginRequired, members.WebSession.LogoutMiddleware).HandleFunc(commonaction.SuccessAction)
 	Router.POST("/login").Handle(loginaction.ActionLogin)
 	Router.POST("/register").Handle(registeraction.ActionRegister)
 	return Router

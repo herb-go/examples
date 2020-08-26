@@ -92,7 +92,7 @@ func (f *LoginForm) Validate() error {
 		if err != nil {
 			return err
 		}
-		f.ValidateFieldMessagef(uid != "", "Username", userform.MsgUserNotAvailable)
+		f.ValidateFieldMessagef(uid != "", "Username", userform.MsgIncorrectUsernameOrPassword)
 	}
 	if !f.HasError() {
 		err = f.ValidateUserStatus()
@@ -116,7 +116,7 @@ func (f *LoginForm) InitWithRequest(r *http.Request) error {
 	//such as get current user id or ip address.
 
 	//Set form labels with translated messages
-	f.SetComponentLabels(ui.GetMessages(f.Lang(), "herbgo.member").Collection(LoginFormFieldLabels))
+	f.SetComponentLabels(ui.GetMessages(f.Lang(), "herbgo.usersystem").Collection(LoginFormFieldLabels))
 
 	return nil
 }
