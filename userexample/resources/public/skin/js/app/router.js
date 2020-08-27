@@ -30,6 +30,14 @@ define(function(require) {
         }
       },
       {
+        path: "/list",
+        name: "list",
+        component: vueloader("components/pages/list/index"),
+        meta: {
+          anonymous: false
+        }
+      },
+      {
         path: "/updatepassword",
         name: "updatepassword",
         component: vueloader("components/pages/updatepassword/index"),
