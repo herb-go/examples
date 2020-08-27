@@ -21,7 +21,14 @@ define(function(require) {
           anonymous: false
         }
       },
-
+      {
+        path: "/actives",
+        name: "actives",
+        component: vueloader("components/pages/actives/index"),
+        meta: {
+          anonymous: false
+        }
+      },
       {
         path: "/login",
         name: "login",

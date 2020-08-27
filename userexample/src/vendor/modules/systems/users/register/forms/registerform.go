@@ -67,10 +67,10 @@ func (f *RegisterForm) Validate() error {
 		a.Keyword = "account"
 		a.Account = f.Account
 		uid, err := members.Account.AccountToUID(a)
-		if err != nil && err != user.ErrUserNotExists {
+		if err != nil {
 			return err
 		}
-		f.ValidateFieldf(uid == "" && err == user.ErrUserNotExists, "Account", "帐号已存在")
+		f.ValidateFieldf(uid == "", "Account", "帐号已存在")
 	}
 	return nil
 }

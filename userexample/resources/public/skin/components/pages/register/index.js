@@ -1,6 +1,6 @@
 define(function(require) {
   var itemcreate=require("js/app/apis/user/register")
-  var successurl="successurl"
+  var successurl="/"
   return {
     name: "componentname",
     template: require("text!./index.html"),

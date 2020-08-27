@@ -33,5 +33,5 @@ var ActionCurrent = action.New(func(w http.ResponseWriter, r *http.Request) {
 		}
 		acc = (*a)[0].Account
 	}
-	render.MustJSON(w, map[string]interface{}{"UID": uid, "Profile": p, "Account": acc}, 200)
+	render.MustJSON(w, map[string]interface{}{"UID": uid, "Name": p.Load("name"), "Company": p.Load("company"), "Account": acc}, 200)
 })

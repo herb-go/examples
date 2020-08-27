@@ -1,0 +1,43 @@
+<div>
+  <h1>活动会话</h1>
+  <el-row id="add" class="add">
+  </el-row>
+  <el-table
+    :data="Items"
+    ref="table"
+    stripe
+    style="width: 100%"
+  >
+    <el-table-column prop="Ip" label="IP地址"> </el-table-column>
+    <el-table-column prop="ID" label="会话ID"> </el-table-column>
+
+    <el-table-column prop="LoginTime" label="登陆时间">
+    <template slot-scope="scope">
+      {{scope.row.LoginTime|datetime}}
+    </template>
+     </el-table-column>
+    <el-table-column prop="LastActive" label="最后活动时间"> 
+      <template slot-scope="scope">
+        {{scope.row.LastActive|datetime}}
+      </template>
+    </el-table-column>
+
+    <el-table-column fixed="right" label="操作" width="100">
+      <template slot-scope="scope">
+
+        <el-button @click="handleDelete(scope.row)" type="text" size="small"
+          >注销</el-button
+        >
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination
+    :page-size="10"
+    :pager-count="7"
+    :current-page.sync="CurrentPage"
+    @current-change="onPage"
+    layout="prev, pager, next"
+    :total="Count"
+  >
+  </el-pagination>
+</div>

@@ -4,6 +4,7 @@ import (
 	"github.com/herb-go/usersystem"
 	"github.com/herb-go/usersystem/httpusersystem/services/websession"
 	"github.com/herb-go/usersystem/services/activesessions"
+	"github.com/herb-go/usersystem/services/sessionpayload"
 	"github.com/herb-go/usersystem/services/useraccount"
 	"github.com/herb-go/usersystem/services/userpassword"
 	"github.com/herb-go/usersystem/services/userprofile"
@@ -44,6 +45,9 @@ var WebSession = websession.MustNewAndInstallTo(User)
 
 //ActiveSessions user active sessions module.Comment if not used.
 var ActiveSessions = activesessions.MustNewAndInstallTo(User)
+
+//Payload user session payload module.Coment if not used
+var Payload = sessionpayload.MustNewAndInstallTo(User)
 
 func init() {
 	util.Must(User.Ready())

@@ -3,10 +3,13 @@ package activesaction
 import (
 	"modules/members"
 	"net/http"
+	"strconv"
+
+	"github.com/herb-go/usersystem/services/activesessions"
+
+	"github.com/herb-go/usersystem-drivers/commonpayload"
 
 	"github.com/herb-go/usersystem/usersession"
-
-	"github.com/herb-go/herbsecurity/authority"
 
 	"github.com/herb-go/herb/middleware/action"
 	"github.com/herb-go/herb/ui/render"
@@ -14,7 +17,10 @@ import (
 
 type Result struct {
 	LastActive int64
-	Payloads   *authority.Payloads
+	LoginTime  int64
+	RevokeCode string
+	ID         string
+	Ip         string
 }
 
 var ActionActives = action.New(func(w http.ResponseWriter, r *http.Request) {
@@ -36,7 +42,17 @@ var ActionActives = action.New(func(w http.ResponseWriter, r *http.Request) {
 		if session == nil {
 			continue
 		}
-		result = append(result, &Result{Payloads: session.Payloads, LastActive: actives[k].LastActive.Unix()})
+		lt, err := strconv.ParseInt(session.Payloads.LoadString(commonpayload.PayloadNameLogintime), 10, 64)
+		if err != nil {
+			panic(err)
+		}
+		result = append(result, &Result{
+			LoginTime:  lt,
+			LastActive: actives[k].LastActive.Unix(),
+			Ip:         session.Payloads.LoadString(commonpayload.PayloadNameHTTPIp),
+			ID:         session.Payloads.LoadString(activesessions.PayloadSerialNumber),
+			RevokeCode: session.RevokeCode(),
+		})
 	}
-	render.MustJSON(w, result, 200)
+	render.MustJSON(w, map[string]interface{}{"Items": result}, 200)
 })

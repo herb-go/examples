@@ -5,7 +5,8 @@ define(function(require) {
     current: "/api/current",
     logout: "/api/logout",
     login: "/api/login",
-    register: "/api/register"
+    register: "/api/register",
+    actives:"/api/actives"
   };
   return app;
 });

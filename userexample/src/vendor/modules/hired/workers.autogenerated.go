@@ -13,6 +13,14 @@ func init() {
 	//You can add Introduction by add comment in form WORKER(MemActives):Introduction
 	worker.Hire("hired.MemActives", &MemActives)
 
+	//Worker "hired.PayloadHTTPIp"
+	worker.Hire("hired.PayloadHTTPIp", &PayloadHTTPIp).
+		WithIntroduction("User login time directive")
+
+	//Worker "hired.PayloadLogintime"
+	worker.Hire("hired.PayloadLogintime", &PayloadLogintime).
+		WithIntroduction("User login time directive")
+
 	//Worker "hired.TOMlUser"
 	worker.Hire("hired.TOMlUser", &TOMlUser).
 		WithIntroduction("Member ldap user directive")

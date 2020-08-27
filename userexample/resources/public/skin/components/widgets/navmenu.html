@@ -1,5 +1,7 @@
 <el-menu router='true' class="el-menu-demo" mode="horizontal">
     <el-menu-item index="/">控制台</el-menu-item>
+    <el-menu-item index="/actives">活动会话</el-menu-item>
+
     <el-submenu v-if="user && user.UID" id="nav-user">
         <template slot="title">{{ user.Account }}</template>
         <el-menu-item index="/changepassword">修改密码</el-menu-item>

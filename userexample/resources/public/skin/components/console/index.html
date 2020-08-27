@@ -1,3 +1,17 @@
 <div>
   <h1>控制台</h1>
+  <el-form ref="form" :model="user" label-width="80px">
+    <el-form-item label="用户帐号">
+      {{user.Account}}
+    </el-form-item>
+    <el-form-item label="用户ID">
+        {{user.UID}}
+      </el-form-item>
+      <el-form-item label="名字">
+        {{user.Name}}
+      </el-form-item>
+      <el-form-item label="公司">
+        {{user.Company}}
+      </el-form-item>
+  </el-form>
 </div>

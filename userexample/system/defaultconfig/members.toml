@@ -35,3 +35,11 @@ ID="hired.MemActives"
 [Directives.Config]
 [Directives.Config.Durations]
 "web"="60m"
+
+# payload created time Directive
+[[Directives]]
+ID="hired.PayloadLogintime"
+
+# payload http ip Directive
+[[Directives]]
+ID="hired.PayloadHTTPIp"
