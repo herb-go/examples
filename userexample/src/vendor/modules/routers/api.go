@@ -8,6 +8,7 @@ import (
 	"modules/systems/users/currentaction"
 	"modules/systems/users/listaction"
 	registeraction "modules/systems/users/register/actions"
+	updatepasswordaction "modules/systems/users/updatepassword/actions"
 
 	"github.com/herb-go/herb/identifier"
 
@@ -36,6 +37,7 @@ var RouterAPIFactory = router.NewFactory(func() router.Router {
 	Router.GET("/list").Handle(listaction.ActionList)
 	Router.GET("/current").Use(LoginRequired).Handle(currentaction.ActionCurrent)
 	Router.GET("/actives").Use(LoginRequired).Handle(activesaction.ActionActives)
+	Router.POST("/updatepassword").Use(LoginRequired).Handle(updatepasswordaction.ActionUpdatepassword)
 	Router.POST("/logout").Use(LoginRequired, members.WebSession.LogoutMiddleware).HandleFunc(commonaction.SuccessAction)
 	Router.POST("/login").Handle(loginaction.ActionLogin)
 	Router.POST("/register").Handle(registeraction.ActionRegister)

@@ -42,8 +42,8 @@ func (f *UpdatepasswordForm) ComponentID() string {
 //Validate Validate form and return any error if raised.
 func (f *UpdatepasswordForm) Validate() error {
 	commonform.ValidateRequiredString(f, f.Password, "Passsword")
-	commonform.ValidateRequiredPointer(f, f.NewPassword, "NewPassword")
-	commonform.ValidateRequiredPointer(f, f.RepeatPassword, "RepeatPassword")
+	commonform.ValidateRequiredString(f, f.NewPassword, "NewPassword")
+	commonform.ValidateRequiredString(f, f.RepeatPassword, "RepeatPassword")
 	if !f.HasError() {
 		commonform.ValidateStringLength(f, f.NewPassword, "NewPassword", 6, 32)
 	}
@@ -62,7 +62,12 @@ func (f *UpdatepasswordForm) Validate() error {
 
 //Exec execwhen form validated.
 func (f *UpdatepasswordForm) Exec() error {
-	return members.Password.UpdatePassword(f.uid, f.NewPassword)
+	err := members.Password.UpdatePassword(f.uid, f.NewPassword)
+	if err != nil {
+		return nil
+	}
+	_, err = members.Term.StartNewTerm(f.uid)
+	return err
 }
 
 //InitWithRequest init updatepassword form  with http request.
