@@ -11,16 +11,21 @@ import (
 )
 
 var ActionRevoke = action.New(func(w http.ResponseWriter, r *http.Request) {
-	code := router.GetParams(r).Get("id")
-	if code == "" {
+	id := router.GetParams(r).Get("id")
+	if id == "" {
 		http.NotFound(w, r)
 		return
 	}
-	session, err := members.WebSession.GetSession
-	_, err := members.WebSession.RevokeSession(code)
-	if err != nil {
-		panic(err)
+	session, err := members.WebSession.GetSession(id)
+	if session != nil {
+		_, err = members.WebSession.RevokeSession(session.RevokeCode())
+		if err != nil {
+			panic(err)
+		}
+		err = members.ActiveSessions.PurgeActiveSession(session)
+		if err != nil {
+			panic(err)
+		}
 	}
-	members.ActiveSessions.PurgeActiveSession(members.WebSession)
 	commonaction.SuccessAction(w, r)
 })

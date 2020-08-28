@@ -8,6 +8,7 @@ define(function(require) {
     register: "/api/register",
     actives:"/api/actives",
     list:"/api/list",
+    revoke:"/api/revoke",
     updatepassword:"/api/updatepassword"
   };
   return app;

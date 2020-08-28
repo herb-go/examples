@@ -1,6 +1,6 @@
 define(function(require) {
   var itemlist = require("js/app/apis/user/actives");
-  // var itemedelete = require("js/app/apis/itemedelete");
+  var itemerevoke = require("js/app/apis/user/revoke");
   var lodash = require("lodash");
   return {
     name: "compomentname",
@@ -39,9 +39,9 @@ define(function(require) {
           type: "warning"
         })
           .then(function() {
-            // itemedelete(self, item.RevokeCode, function() {
-            //   self.load();
-            // });
+            itemerevoke(self, item.SessionID, function() {
+              self.load();
+            });
           })
           .catch(function() {});
       },

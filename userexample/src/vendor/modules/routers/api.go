@@ -6,6 +6,8 @@ import (
 	"modules/middlewares"
 	"modules/systems/users/activesaction"
 	"modules/systems/users/currentaction"
+	"modules/systems/users/revokeaction"
+
 	"modules/systems/users/listaction"
 	registeraction "modules/systems/users/register/actions"
 	updatepasswordaction "modules/systems/users/updatepassword/actions"
@@ -38,6 +40,8 @@ var RouterAPIFactory = router.NewFactory(func() router.Router {
 	Router.GET("/current").Use(LoginRequired).Handle(currentaction.ActionCurrent)
 	Router.GET("/actives").Use(LoginRequired).Handle(activesaction.ActionActives)
 	Router.POST("/updatepassword").Use(LoginRequired).Handle(updatepasswordaction.ActionUpdatepassword)
+	Router.POST("/revoke/:id").Use(LoginRequired).Handle(revokeaction.ActionRevoke)
+
 	Router.POST("/logout").Use(LoginRequired, members.WebSession.LogoutMiddleware).HandleFunc(commonaction.SuccessAction)
 	Router.POST("/login").Handle(loginaction.ActionLogin)
 	Router.POST("/register").Handle(registeraction.ActionRegister)
