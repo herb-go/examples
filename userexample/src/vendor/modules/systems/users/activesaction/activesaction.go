@@ -20,6 +20,7 @@ type Result struct {
 	LoginTime  int64
 	RevokeCode string
 	ID         string
+	SessionID  string
 	Ip         string
 }
 
@@ -49,6 +50,7 @@ var ActionActives = action.New(func(w http.ResponseWriter, r *http.Request) {
 		result = append(result, &Result{
 			LoginTime:  lt,
 			LastActive: actives[k].LastActive.Unix(),
+			SessionID:  actives[k].SessionID,
 			Ip:         session.Payloads.LoadString(commonpayload.PayloadNameHTTPIp),
 			ID:         session.Payloads.LoadString(activesessions.PayloadSerialNumber),
 			RevokeCode: session.RevokeCode(),
