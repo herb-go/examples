@@ -29,14 +29,14 @@ var MemActives = memactives.DirectiveFactory
 //UIDAccount  directive factory  from "github.com/herb-go/usersystem-drivers/uidaccount"
 var UIDAccount = uidaccount.DirectiveFactory
 
-//WORKER(PayloadLogintime):User login time  directive
+//WORKER(PayloadLogintime):User login time payload directive
 
-//PayloadLogintime  createdtime directive factory  from "github.com/herb-go/usersystem-drivers/commonpayload"
+//PayloadLogintime  login time payload directive factory  from "github.com/herb-go/usersystem-drivers/commonpayload"
 var PayloadLogintime = commonpayload.LoginPayload
 
-//WORKER(PayloadHTTPIp):User login time  directive
+//WORKER(PayloadHTTPIp):User http id payload  directive
 
-//PayloadHTTPIp  createdtime directive factory  from "github.com/herb-go/usersystem-drivers/commonpayload"
+//PayloadHTTPIp  http ip payload directive factory  from "github.com/herb-go/usersystem-drivers/commonpayload"
 var PayloadHTTPIp = commonpayload.HTTPIpPayload
 
 // //MyUserSystemDirectiveFactory put your own directive factory code here

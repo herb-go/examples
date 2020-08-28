@@ -9,6 +9,8 @@ define(function(require) {
     actives:"/api/actives",
     list:"/api/list",
     revoke:"/api/revoke",
+    enable:"/api/enable",
+    disable:"/api/disable",
     updatepassword:"/api/updatepassword"
   };
   return app;

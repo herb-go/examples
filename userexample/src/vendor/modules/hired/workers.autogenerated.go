@@ -15,11 +15,11 @@ func init() {
 
 	//Worker "hired.PayloadHTTPIp"
 	worker.Hire("hired.PayloadHTTPIp", &PayloadHTTPIp).
-		WithIntroduction("User login time directive")
+		WithIntroduction("User http id payload directive")
 
 	//Worker "hired.PayloadLogintime"
 	worker.Hire("hired.PayloadLogintime", &PayloadLogintime).
-		WithIntroduction("User login time directive")
+		WithIntroduction("User login time payload directive")
 
 	//Worker "hired.TOMlUser"
 	worker.Hire("hired.TOMlUser", &TOMlUser).

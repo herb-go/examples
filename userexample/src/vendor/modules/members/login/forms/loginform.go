@@ -95,17 +95,17 @@ func (f *LoginForm) Validate() error {
 		f.ValidateFieldMessagef(uid != "", "Username", userform.MsgIncorrectUsernameOrPassword)
 	}
 	if !f.HasError() {
-		err = f.ValidateUserStatus()
-		if err != nil {
-			return err
-		}
-	}
-	if !f.HasError() {
 		result, err := usermodule.Password.VerifyPassword(uid, f.Password)
 		if err != nil {
 			return err
 		}
 		f.ValidateFieldMessagef(result == true, "Username", userform.MsgIncorrectUsernameOrPassword)
+	}
+	if !f.HasError() {
+		err = f.ValidateUserStatus()
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
