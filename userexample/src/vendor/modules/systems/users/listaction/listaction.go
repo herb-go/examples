@@ -4,12 +4,13 @@ import (
 	"modules/members"
 	"net/http"
 
+	"github.com/herb-go/usersystem/userdataset"
+
 	"github.com/herb-go/user/status"
 
 	"github.com/herb-go/herb/ui/render"
 
 	"github.com/herb-go/herb/middleware/action"
-	"github.com/herb-go/usersystem-drivers/tomluser"
 )
 
 type Result struct {
@@ -22,20 +23,42 @@ type Result struct {
 }
 
 var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
-	users := members.Status.Service.(*tomluser.Users)
-	data := users.GetAllUsers()
+	users, _, err := members.Status.Service.ListUsersByStatus("", 0, status.StatusBanned, status.StatusNormal)
+	if err != nil {
+		panic(err)
+	}
 	results := []*Result{}
-	for _, v := range data.Users {
-		label, err := members.Status.Service.Label(v.Status())
+	ds, err := userdataset.ExecNewDataset(members.User)
+	if err != nil {
+		panic(err)
+	}
+	pfs, err := members.Profile.LoadProfiles(ds, false, users...)
+	for _, v := range users {
+		acc, err := members.Account.Account(v)
 		if err != nil {
 			panic(err)
 		}
+		st, err := members.Status.LoadStatus(v)
+		if err != nil {
+			panic(err)
+		}
+		label, err := members.Status.Service.Label(st)
+		if err != nil {
+			panic(err)
+		}
+		var name string
+		var company string
+		pf := pfs[v]
+		if pf != nil {
+			name = pf.Load("name")
+			company = pf.Load("company")
+		}
 		result := &Result{
-			ID:          v.UID,
-			Account:     v.Accounts[0].Account,
-			Name:        v.Profiles.Load("name"),
-			Company:     v.Profiles.Load("company"),
-			Status:      v.Status(),
+			ID:          v,
+			Account:     (*acc)[0].Account,
+			Name:        name,
+			Company:     company,
+			Status:      st,
 			StatusLabel: label,
 		}
 		results = append(results, result)
