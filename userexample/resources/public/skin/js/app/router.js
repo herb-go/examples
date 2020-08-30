@@ -46,6 +46,14 @@ define(function(require) {
         }
       },
       {
+        path: "/updateprofile",
+        name: "updateprofile",
+        component: vueloader("components/pages/updateprofile/index"),
+        meta: {
+          anonymous: false
+        }
+      },
+      {
         path: "/login",
         name: "login",
         component: vueloader("components/pages/login"),

@@ -11,6 +11,7 @@ define(function(require) {
     revoke:"/api/revoke",
     enable:"/api/enable",
     disable:"/api/disable",
+    updateprofile:"/api/updateprofile",
     updatepassword:"/api/updatepassword"
   };
   return app;

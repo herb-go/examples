@@ -12,6 +12,7 @@ import (
 	"modules/systems/users/listaction"
 	registeraction "modules/systems/users/register/actions"
 	updatepasswordaction "modules/systems/users/updatepassword/actions"
+	updateprofileaction "modules/systems/users/updateprofile/actions"
 
 	"github.com/herb-go/herb/identifier"
 
@@ -41,6 +42,8 @@ var RouterAPIFactory = router.NewFactory(func() router.Router {
 	Router.GET("/current").Use(LoginRequired).Handle(currentaction.ActionCurrent)
 	Router.GET("/actives").Use(LoginRequired).Handle(activesaction.ActionActives)
 	Router.POST("/updatepassword").Use(LoginRequired).Handle(updatepasswordaction.ActionUpdatepassword)
+	Router.POST("/updateprofile").Use(LoginRequired).Handle(updateprofileaction.ActionUpdateprofile)
+
 	Router.POST("/revoke/:id").Use(LoginRequired).Handle(revokeaction.ActionRevoke)
 	Router.POST("/enable/:id").Use(LoginRequired).Handle(statusactions.ActionEnable)
 	Router.POST("/disable/:id").Use(LoginRequired).Handle(statusactions.ActionDisable)
