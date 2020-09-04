@@ -21,7 +21,7 @@ var RouterFactory = router.NewFactory(func() router.Router {
 			Use(AssestsMiddlewares()...).
 			HandleFunc(simplehttpserver.ServeFolder(util.Resources(app.Assets.Location)))
 	}
-	Router.GET("/").Handle(http.RedirectHandler("/public/", 301))
+	Router.GET("/").Handle(http.RedirectHandler("/public/", 302))
 	Router.StripPrefix("/api").
 		Use(APIMiddlewares()...).
 		Handle(RouterAPIFactory.CreateRouter())
