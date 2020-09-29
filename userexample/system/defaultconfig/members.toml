@@ -3,6 +3,7 @@
 ID="hired.TOMlUser"
 [Directives.Config]
 Source        ="appdata/users.static.toml"
+Example = "system/exampledata/users.static.toml"
 ProfileFields =["name","company"]
 ServePassword =true
 ServeStatus   =true
