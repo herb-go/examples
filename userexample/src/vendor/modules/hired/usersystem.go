@@ -2,6 +2,7 @@ package hired
 
 import (
 	"github.com/herb-go/usersystem-drivers/commonpayload"
+	"github.com/herb-go/usersystem-drivers/redisactives"
 	// "github.com/herb-go/usersystem"
 	"github.com/herb-go/usersystem-drivers/herbsession"
 	"github.com/herb-go/usersystem-drivers/memactives"
@@ -23,6 +24,9 @@ var TOMlUser = tomluser.DirectiveFactory
 
 //MemActives usersystem directive factory  from "github.com/herb-go/usersystem-drivers/memactives"
 var MemActives = memactives.DirectiveFactory
+
+//RedisActives usersystem directive factory  from "github.com/herb-go/usersystem-drivers/memactives"
+var RedisActives = redisactives.DirectiveFactory
 
 //WORKER(UIDAccount):Member uid as account  directive
 

@@ -21,6 +21,10 @@ func init() {
 	worker.Hire("hired.PayloadLogintime", &PayloadLogintime).
 		WithIntroduction("User login time payload directive")
 
+	//Worker "hired.RedisActives"
+	//You can add Introduction by add comment in form WORKER(RedisActives):Introduction
+	worker.Hire("hired.RedisActives", &RedisActives)
+
 	//Worker "hired.TOMlUser"
 	worker.Hire("hired.TOMlUser", &TOMlUser).
 		WithIntroduction("Member ldap user directive")

@@ -34,7 +34,7 @@ HashMode="md5"
 [[Directives]]
 ID="hired.HerbSession"
 [Directives.Config]
-AutoStart=true
+DisableAutoStart=false
 Timeout=3600
 MaxLifetime=72000
 LastActiveInterval=100
