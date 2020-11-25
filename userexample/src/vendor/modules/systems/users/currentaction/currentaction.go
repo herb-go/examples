@@ -27,7 +27,7 @@ var ActionCurrent = action.New(func(w http.ResponseWriter, r *http.Request) {
 	}
 	var acc string
 	if s != nil && uid != "" {
-		a, err := members.Account.Account(uid)
+		a, err := members.Account.Accounts(uid)
 		if err != nil {
 			panic(err)
 		}

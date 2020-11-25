@@ -34,7 +34,7 @@ var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
 	}
 	pfs, err := members.Profile.LoadProfiles(ds, false, users...)
 	for _, v := range users {
-		acc, err := members.Account.Account(v)
+		acc, err := members.Account.Accounts(v)
 		if err != nil {
 			panic(err)
 		}
