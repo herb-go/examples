@@ -23,7 +23,7 @@ type Result struct {
 }
 
 var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
-	users, err := members.Status.Service.ListUsersByStatus("", 0, status.StatusBanned, status.StatusNormal)
+	users, err := members.Status.Service.ListUsersByStatus("", 0, false, status.StatusBanned, status.StatusNormal)
 	if err != nil {
 		panic(err)
 	}
