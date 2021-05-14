@@ -77,7 +77,8 @@ func (f *RegisterForm) Validate() error {
 
 //Exec execwhen form validated.
 func (f *RegisterForm) Exec() error {
-	return users.RegisterUser(f.Account, f.Password, f.Name, f.Company)
+	users.RegisterUser(f.Account, f.Password, f.Name, f.Company)
+	return nil
 }
 
 //InitWithRequest init register form  with http request.

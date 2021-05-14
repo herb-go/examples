@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/herb-go/herbsystem"
+
 	"github.com/herb-go/herb/ui"
 	"github.com/herb-go/herb/ui/validator/formdata"
 	"github.com/herb-go/user"
@@ -50,7 +52,10 @@ func (f *LoginForm) UID() string {
 
 //ValidateUserStatus validate user status
 func (f *LoginForm) ValidateUserStatus() error {
-	a, err := usermodule.Status.IsUserAvaliable(f.uid)
+	var a bool
+	err := herbsystem.Catch(func() {
+		a = usermodule.Status.MustIsUserAvaliable(f.uid)
+	})
 	if err == user.ErrUserNotExists {
 		f.ValidateFieldMessagef(true, "Username", userform.MsgIncorrectUsernameOrPassword)
 		return nil

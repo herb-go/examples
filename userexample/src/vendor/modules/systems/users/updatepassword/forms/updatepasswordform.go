@@ -66,8 +66,8 @@ func (f *UpdatepasswordForm) Exec() error {
 	if err != nil {
 		return nil
 	}
-	_, err = members.Term.StartNewTerm(f.uid)
-	return err
+	members.Term.MustStartNewTerm(f.uid)
+	return nil
 }
 
 //InitWithRequest init updatepassword form  with http request.

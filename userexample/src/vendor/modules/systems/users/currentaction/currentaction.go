@@ -10,20 +10,15 @@ import (
 )
 
 var ActionCurrent = action.New(func(w http.ResponseWriter, r *http.Request) {
-	s, err := members.WebSession.GetRequestSession(r)
-	if err != nil {
-		panic(err)
-	}
+	s := members.WebSession.MustGetRequestSession(r)
+
 	var uid string
 	if s != nil {
 		uid = s.UID()
 	}
 	var p *profile.Profile
 	if s != nil && uid != "" {
-		p, err = members.Profile.LoadProfile(uid)
-		if err != nil {
-			panic(err)
-		}
+		p = members.Profile.MustLoadProfile(uid)
 	}
 	var acc string
 	if s != nil && uid != "" {

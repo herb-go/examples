@@ -23,25 +23,19 @@ type Result struct {
 }
 
 var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
-	users, err := members.Status.Service.ListUsersByStatus("", 0, false, status.StatusBanned, status.StatusNormal)
-	if err != nil {
-		panic(err)
-	}
+	users := members.Status.Service.MustListUsersByStatus("", 0, false, status.StatusBanned, status.StatusNormal)
+
 	results := []*Result{}
-	ds, err := userdataset.ExecNewDataset(members.User)
-	if err != nil {
-		panic(err)
-	}
-	pfs, err := members.Profile.LoadProfiles(ds, false, users...)
+	ds := userdataset.MustExecNewDataset(members.User)
+
+	pfs := members.Profile.MustLoadProfiles(ds, false, users...)
 	for _, v := range users {
 		acc, err := members.Account.Accounts(v)
 		if err != nil {
 			panic(err)
 		}
-		st, err := members.Status.LoadStatus(v)
-		if err != nil {
-			panic(err)
-		}
+		st := members.Status.MustLoadStatus(v)
+
 		label, err := members.Status.Service.Label(st)
 		if err != nil {
 			panic(err)

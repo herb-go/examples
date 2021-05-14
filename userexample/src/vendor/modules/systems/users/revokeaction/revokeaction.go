@@ -16,16 +16,10 @@ var ActionRevoke = action.New(func(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	session, err := members.WebSession.GetSession(id)
+	session := members.WebSession.MustGetSession(id)
 	if session != nil {
-		_, err = members.WebSession.RevokeSession(session.RevokeCode())
-		if err != nil {
-			panic(err)
-		}
-		err = members.ActiveSessions.PurgeActiveSession(session)
-		if err != nil {
-			panic(err)
-		}
+		members.WebSession.MustRevokeSession(session.RevokeCode())
+		members.ActiveSessions.MustPurgeActiveSession(session)
 	}
 	commonaction.SuccessAction(w, r)
 })

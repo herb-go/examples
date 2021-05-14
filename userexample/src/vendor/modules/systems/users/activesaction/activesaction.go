@@ -25,21 +25,14 @@ type Result struct {
 }
 
 var ActionActives = action.New(func(w http.ResponseWriter, r *http.Request) {
-	session, err := members.WebSession.GetRequestSession(r)
-	if err != nil {
-		panic(err)
-	}
+	session := members.WebSession.MustGetRequestSession(r)
+
 	uid := session.UID()
-	actives, err := members.ActiveSessions.GetActiveSessions("web", uid)
-	if err != nil {
-		panic(err)
-	}
+	actives := members.ActiveSessions.MustGetActiveSessions("web", uid)
+
 	result := make([]*Result, 0, len(actives))
 	for k := range actives {
-		session, err := usersession.ExecGetSession(members.User, "web", actives[k].SessionID)
-		if err != nil {
-			panic(err)
-		}
+		session := usersession.MustExecGetSession(members.User, "web", actives[k].SessionID)
 		if session == nil {
 			continue
 		}

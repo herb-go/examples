@@ -1,6 +1,7 @@
 package members
 
 import (
+	"github.com/herb-go/herbsystem"
 	"github.com/herb-go/usersystem"
 	"github.com/herb-go/usersystem/httpusersystem/services/websession"
 	"github.com/herb-go/usersystem/modules/activesessions"
@@ -50,11 +51,13 @@ var ActiveSessions = activesessions.MustNewAndInstallTo(User)
 var Payload = sessionpayload.MustNewAndInstallTo(User)
 
 func init() {
-	util.Must(User.Ready())
+	herbsystem.MustReady(User)
 	util.RegisterModule(ModuleName, func() {
-		util.Must(User.Configuring())
+		herbsystem.MustConfigure(User)
 		util.Must(app.Members.ApplyTo(User))
-		util.Must(User.Start())
-		util.OnQuitAndLogError(User.Stop)
+		herbsystem.MustStart(User)
+		util.OnQuit(func() {
+			herbsystem.MustStop(User)
+		})
 	})
 }

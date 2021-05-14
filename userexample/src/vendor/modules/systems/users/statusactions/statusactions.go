@@ -17,10 +17,7 @@ var ActionEnable = action.New(func(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	err := members.Status.UpdateStatus(id, status.StatusNormal)
-	if err != nil {
-		panic(err)
-	}
+	members.Status.MustUpdateStatus(id, status.StatusNormal)
 	commonaction.SuccessAction(w, r)
 })
 
@@ -30,9 +27,6 @@ var ActionDisable = action.New(func(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 		return
 	}
-	err := members.Status.UpdateStatus(id, status.StatusBanned)
-	if err != nil {
-		panic(err)
-	}
+	members.Status.MustUpdateStatus(id, status.StatusBanned)
 	commonaction.SuccessAction(w, r)
 })
