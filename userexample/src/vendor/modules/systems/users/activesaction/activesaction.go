@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/herb-go/usersystem/services/activesessions"
+	"github.com/herb-go/usersystem/modules/activesessions"
 
 	"github.com/herb-go/usersystem-drivers/commonpayload"
 
