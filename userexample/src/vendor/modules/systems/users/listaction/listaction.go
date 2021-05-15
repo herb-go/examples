@@ -30,11 +30,8 @@ var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
 
 	pfs := members.Profile.MustLoadProfiles(ds, false, users...)
 	for _, v := range users {
-		acc, err := members.Account.Accounts(v)
-		if err != nil {
-			panic(err)
-		}
-		st := members.Status.MustLoadStatus(v)
+		acc := members.Account.MustAccounts(v)
+		st, _ := members.Status.MustLoadStatus(v)
 
 		label, err := members.Status.Service.Label(st)
 		if err != nil {

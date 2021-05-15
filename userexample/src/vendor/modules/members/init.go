@@ -3,7 +3,7 @@ package members
 import (
 	"github.com/herb-go/herbsystem"
 	"github.com/herb-go/usersystem"
-	"github.com/herb-go/usersystem/httpusersystem/services/websession"
+	"github.com/herb-go/usersystem/httpusersystem/modules/websession"
 	"github.com/herb-go/usersystem/modules/activesessions"
 	"github.com/herb-go/usersystem/modules/sessionpayload"
 	"github.com/herb-go/usersystem/modules/useraccount"

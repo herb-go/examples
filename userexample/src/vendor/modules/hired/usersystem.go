@@ -3,9 +3,11 @@ package hired
 import (
 	"github.com/herb-go/usersystem-drivers/commonpayload"
 	"github.com/herb-go/usersystem-drivers/redisactives"
+
 	// "github.com/herb-go/usersystem"
 	"github.com/herb-go/usersystem-drivers/herbsession"
 	"github.com/herb-go/usersystem-drivers/memactives"
+	"github.com/herb-go/usersystem-drivers/sqlusersystem"
 	"github.com/herb-go/usersystem-drivers/tomluser"
 	"github.com/herb-go/usersystem-drivers/uidaccount"
 )
@@ -32,6 +34,12 @@ var RedisActives = redisactives.DirectiveFactory
 
 //UIDAccount  directive factory  from "github.com/herb-go/usersystem-drivers/uidaccount"
 var UIDAccount = uidaccount.DirectiveFactory
+
+//WORKER(SQLUserSystem):sql usersystem  directive
+
+//SQLUserSystem  directive factory  from "github.com/herb-go/usersystem-drivers/sqlusersystem"
+
+var SQLUserSystem = sqlusersystem.DirectiveFactory
 
 //WORKER(PayloadLogintime):User login time payload directive
 

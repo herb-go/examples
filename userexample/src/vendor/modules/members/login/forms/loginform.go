@@ -77,10 +77,7 @@ func (f *LoginForm) GetUserID() (string, error) {
 	account := user.NewAccount()
 	account.Keyword = AccountKeyword
 	account.Account = strings.ToLower(f.Username)
-	uid, err := usermodule.Account.AccountToUID(account)
-	if err != nil {
-		return "", err
-	}
+	uid := usermodule.Account.MustAccountToUID(account)
 	f.uid = uid
 	return f.uid, nil
 }

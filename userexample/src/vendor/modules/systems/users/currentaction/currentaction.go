@@ -22,10 +22,7 @@ var ActionCurrent = action.New(func(w http.ResponseWriter, r *http.Request) {
 	}
 	var acc string
 	if s != nil && uid != "" {
-		a, err := members.Account.Accounts(uid)
-		if err != nil {
-			panic(err)
-		}
+		a := members.Account.MustAccounts(uid)
 		acc = (*a)[0].Account
 	}
 	render.MustJSON(w, map[string]interface{}{"UID": uid, "Name": p.Load("name"), "Company": p.Load("company"), "Account": acc}, 200)

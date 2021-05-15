@@ -29,10 +29,7 @@ func RegisterUser(account string, password string, name string, company string) 
 
 	usercreate.MustExecCreate(members.User, uid)
 
-	err = members.Account.BindAccount(uid, acc)
-	if err != nil {
-		panic(err)
-	}
+	members.Account.MustBindAccount(uid, acc)
 	err = members.Password.UpdatePassword(uid, password)
 	if err != nil {
 		panic(err)
