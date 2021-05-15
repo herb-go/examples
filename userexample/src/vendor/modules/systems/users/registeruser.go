@@ -13,7 +13,6 @@ import (
 )
 
 func RegisterUser(account string, password string, name string, company string) {
-	var err error
 	var uid string
 	uid = uniqueid.DefaultGenerator.MustGenerateID()
 
@@ -30,10 +29,7 @@ func RegisterUser(account string, password string, name string, company string) 
 	usercreate.MustExecCreate(members.User, uid)
 
 	members.Account.MustBindAccount(uid, acc)
-	err = members.Password.UpdatePassword(uid, password)
-	if err != nil {
-		panic(err)
-	}
+	members.Password.MustUpdatePassword(uid, password)
 	p := profile.NewProfile().With("name", name).With("company", company)
 	members.Profile.MustUpdateProfile(nil, uid, p)
 	members.Status.MustUpdateStatus(uid, status.StatusNormal)

@@ -51,10 +51,7 @@ func (f *UpdatepasswordForm) Validate() error {
 		f.ValidateFieldf(f.NewPassword == f.RepeatPassword, "Repeatpassword", "重复密码不匹配")
 	}
 	if !f.HasError() {
-		ok, err := members.Password.VerifyPassword(f.uid, f.Password)
-		if err != nil {
-			return err
-		}
+		ok := members.Password.MustVerifyPassword(f.uid, f.Password)
 		f.ValidateFieldf(ok, "Password", "密码错误")
 	}
 	return nil
@@ -62,10 +59,7 @@ func (f *UpdatepasswordForm) Validate() error {
 
 //Exec execwhen form validated.
 func (f *UpdatepasswordForm) Exec() error {
-	err := members.Password.UpdatePassword(f.uid, f.NewPassword)
-	if err != nil {
-		return nil
-	}
+	members.Password.MustUpdatePassword(f.uid, f.NewPassword)
 	members.Term.MustStartNewTerm(f.uid)
 	return nil
 }

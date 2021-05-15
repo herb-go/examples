@@ -97,10 +97,7 @@ func (f *LoginForm) Validate() error {
 		f.ValidateFieldMessagef(uid != "", "Username", userform.MsgIncorrectUsernameOrPassword)
 	}
 	if !f.HasError() {
-		result, err := usermodule.Password.VerifyPassword(uid, f.Password)
-		if err != nil {
-			return err
-		}
+		result := usermodule.Password.MustVerifyPassword(uid, f.Password)
 		f.ValidateFieldMessagef(result == true, "Username", userform.MsgIncorrectUsernameOrPassword)
 	}
 	if !f.HasError() {
