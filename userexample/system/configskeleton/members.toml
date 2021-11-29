@@ -35,6 +35,24 @@
 # [Directives.Config]
 # [Directives.Config.Durations]
 # "web"="60m"
+# memactives Directive
+
+# [[Directives]]
+# ID="hired.RedisActives"
+# [Directives.Config]
+# Prefix="actives"
+# Network="tcp"
+# Address="127.0.0.1:6379"
+# Password="password"
+# Db=1
+# ConnectTimeoutInSecond=60
+# ReadTimeoutInSecond=60
+# WriteTimeoutInSecon=60
+# MaxIdle=100
+# MaxAlive=200
+# IdleTimeoutInSecond=60
+# [Directives.Config.Durations]
+# "web"="20s"
 
 # # payload created time Directive
 # [[Directives]]
