@@ -27,3 +27,4 @@ debug
 testconfig_test.go
 .vscode
 .directory
+userexample/src/__debug_bin
