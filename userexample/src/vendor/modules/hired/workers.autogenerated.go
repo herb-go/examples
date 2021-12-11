@@ -25,6 +25,10 @@ func init() {
 	//You can add Introduction by add comment in form WORKER(RedisActives):Introduction
 	worker.Hire("hired.RedisActives", &RedisActives)
 
+	//Worker "hired.SQLUserSystem"
+	worker.Hire("hired.SQLUserSystem", &SQLUserSystem).
+		WithIntroduction("sql usersystem directive")
+
 	//Worker "hired.TOMlUser"
 	worker.Hire("hired.TOMlUser", &TOMlUser).
 		WithIntroduction("Member ldap user directive")
@@ -32,5 +36,9 @@ func init() {
 	//Worker "hired.UIDAccount"
 	worker.Hire("hired.UIDAccount", &UIDAccount).
 		WithIntroduction("Member uid as account directive")
+
+	//Worker "hired.UserCache"
+	worker.Hire("hired.UserCache", &UserCache).
+		WithIntroduction("user cache directive")
 
 }

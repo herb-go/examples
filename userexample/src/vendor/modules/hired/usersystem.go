@@ -3,6 +3,7 @@ package hired
 import (
 	"github.com/herb-go/usersystem-drivers/commonpayload"
 	"github.com/herb-go/usersystem-drivers/redisactives"
+	"github.com/herb-go/usersystem-drivers/usercache"
 
 	// "github.com/herb-go/usersystem"
 	"github.com/herb-go/usersystem-drivers/herbsession"
@@ -40,6 +41,11 @@ var UIDAccount = uidaccount.DirectiveFactory
 //SQLUserSystem  directive factory  from "github.com/herb-go/usersystem-drivers/sqlusersystem"
 
 var SQLUserSystem = sqlusersystem.DirectiveFactory
+
+//WORKER(UserCache):user cache  directive
+
+//UserCache  directive factory  from "github.com/herb-go/usersystem-drivers/usercache"
+var UserCache = usercache.DirectiveFactory
 
 //WORKER(PayloadLogintime):User login time payload directive
 
