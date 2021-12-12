@@ -53,7 +53,7 @@ func (f *UpdateprofileForm) Exec() error {
 	p := profile.NewProfile()
 	p.With("name", f.Name)
 	p.With("company", f.Company)
-	members.Profile.MustUpdateProfile(nil, f.uid, p)
+	members.Profile.MustUpdateProfile(f.uid, p)
 	return nil
 }
 

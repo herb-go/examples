@@ -31,6 +31,6 @@ func RegisterUser(account string, password string, name string, company string) 
 	members.Account.MustBindAccount(uid, acc)
 	members.Password.MustUpdatePassword(uid, password)
 	p := profile.NewProfile().With("name", name).With("company", company)
-	members.Profile.MustUpdateProfile(nil, uid, p)
+	members.Profile.MustUpdateProfile(uid, p)
 	members.Status.MustUpdateStatus(uid, status.StatusNormal)
 }

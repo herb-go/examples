@@ -4,8 +4,6 @@ import (
 	"modules/members"
 	"net/http"
 
-	"github.com/herb-go/usersystem/userdataset"
-
 	"github.com/herb-go/user/status"
 
 	"github.com/herb-go/herb/ui/render"
@@ -26,9 +24,8 @@ var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
 	users := members.Status.Service.MustListUsersByStatus("", 0, false, status.StatusBanned, status.StatusNormal)
 
 	results := []*Result{}
-	ds := userdataset.MustExecNewDataset(members.User)
 
-	pfs := members.Profile.MustLoadProfiles(ds, false, users...)
+	pfs := members.Profile.MustLoadProfiles(users...)
 	for _, v := range users {
 		acc := members.Account.MustAccounts(v)
 		st, _ := members.Status.MustLoadStatus(v)

@@ -17,7 +17,6 @@ func loadConfigs() {
 	config.LoadAll()
 	config.Lock.RUnlock()
 }
-
 func initModules() {
 	util.InitModulesOrderByName()
 	//Put Your own init code here.
