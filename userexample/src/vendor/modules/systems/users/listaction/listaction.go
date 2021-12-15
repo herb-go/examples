@@ -3,6 +3,7 @@ package listaction
 import (
 	"modules/members"
 	"net/http"
+	"sort"
 
 	"github.com/herb-go/user/status"
 
@@ -21,7 +22,12 @@ type Result struct {
 }
 
 var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
-	users := members.Status.Service.MustListUsersByStatus("", 0, false, status.StatusBanned, status.StatusNormal)
+	var q = r.URL.Query()
+	var last = q.Get("last")
+	var rev = q.Get("rev") != ""
+	var limit = 10
+	users := members.Status.Service.MustListUsersByStatus(last, limit+1, rev, status.StatusBanned, status.StatusNormal)
+	sort.Strings(users)
 
 	results := []*Result{}
 
@@ -51,5 +57,14 @@ var ActionList = action.New(func(w http.ResponseWriter, r *http.Request) {
 		}
 		results = append(results, result)
 	}
-	render.MustJSON(w, map[string]interface{}{"Items": results}, 200)
+	var iter string
+	if len(results) > limit {
+		iter = results[limit-1].ID
+		results = results[:limit]
+	}
+	var data = map[string]interface{}{
+		"Items": results,
+		"Iter":  iter,
+	}
+	render.MustJSON(w, data, 200)
 })

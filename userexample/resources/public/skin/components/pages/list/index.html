@@ -24,13 +24,7 @@
       </template>
     </el-table-column>
   </el-table>
-  <el-pagination
-    :page-size="10"
-    :pager-count="7"
-    :current-page.sync="CurrentPage"
-    @current-change="onPage"
-    layout="prev, pager, next"
-    :total="Count"
-  >
-  </el-pagination>
+  <el-button @click="prev" type="text" :disabled="!Items.length||(Rev && !Iter)||(!Rev && !Last)">上一页</el-button>
+  <el-button @click="next" type="text" :disabled="!Items.length||(!Rev && !Iter)||(Rev && !Last)">下一页</el-button>
+
 </div>

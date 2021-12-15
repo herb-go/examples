@@ -17,19 +17,21 @@ define(function(require) {
     methods: {
       load: function() {
         var self = this;
-        page = this.$route.query.page;
-        if (!page) {
-          page = 1;
-        }
-        this.CurrentPage = page * 1;
-        this.Sort = this.$route.query.sort;
-        this.Asc = this.$route.query.order == "ascending";
+        this.Items=[]
+        this.Last = this.$route.query.last;
+        this.Rev = this.$route.query.rev?true:false;
         itemlist(self, function() {});
       },
-      onPage: function(page) {
-        this.CurrentPage = page;
+      prev:function(){
         var query = lodash.clone(this.$route.query);
-        query.page = page;
+        query.last=this.Items[0].ID
+        query.rev="true"
+        this.$router.push({ query: query });
+      },
+      next:function(){
+        var query = lodash.clone(this.$route.query);
+        query.last=this.Items[this.Items.length-1].ID
+        query.rev=""
         this.$router.push({ query: query });
       },
       handleEnable: function(item) {
@@ -62,24 +64,16 @@ define(function(require) {
           })
           .catch(function() {});
       },
-      onSort: function(data) {
-        this.Sort = data.prop;
-        this.Asc = data.order == "ascending";
-        var query = lodash.clone(this.$route.query);
-        query.sort = data.prop;
-        query.order = data.order;
-        this.$router.push({ query: query });
-      }
     },
     template: require("text!./index.html"),
     data: function() {
       return {
         Items: [],
         Sort: "",
-        Asc: true,
+        Rev: false,
+        Last:"",
+        Iter:"",
         errors: [],
-        Count: null,
-        CurrentPage: 1
       };
     }
   };
