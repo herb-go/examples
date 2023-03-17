@@ -34,8 +34,8 @@ var run = func() {
 //Init init app
 func Init() {
 	defer util.RecoverAndExit()
-	util.ApplieationLock.Lock()
-	defer util.ApplieationLock.Unlock()
+	util.ApplicationLock.Lock()
+	defer util.ApplicationLock.Unlock()
 	util.UpdatePaths()
 	util.MustChRoot()
 	loadConfigs()
